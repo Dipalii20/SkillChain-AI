@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-wrap mx-auto"><span class="eyebrow">WELCOME BACK</span><h1 class="h2 fw-bold mt-2 mb-4">Sign in to SkillChain AI</h1>
+<form method="post" class="card clean-card p-4">{% csrf_token %}
+{% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+<div class="mb-3"><label class="form-label">Username</label><input class="form-control" name="username" required autocomplete="username"></div>
+<div class="mb-3"><label class="form-label">Password</label><input class="form-control" type="password" name="password" required autocomplete="current-password"></div>
+<button class="btn btn-primary btn-lg">Sign in</button><p class="mt-3 mb-0 small">New here? <a href="{% url 'register' %}">Create an account</a></p>
+</form></div>
+{% endblock %}

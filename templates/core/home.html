@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}SkillChain AI | Skills to opportunities{% endblock %}
+{% block content %}
+<section class="hero rounded-4 p-4 p-md-5 mb-5">
+  <div class="row align-items-center g-4">
+    <div class="col-lg-7">
+      <span class="eyebrow">AI CAREER MATCHING · BLOCKCHAIN PROOFS</span>
+      <h1 class="display-5 fw-bold mt-3">Turn your skills into <span class="gradient-text">verified opportunities.</span></h1>
+      <p class="lead text-secondary mt-3">Analyze your resume, discover internships that match your skills, and register certificate fingerprints for tamper-evident verification.</p>
+      <div class="d-flex flex-wrap gap-2 mt-4">
+        {% if user.is_authenticated %}<a class="btn btn-primary btn-lg" href="{% url 'dashboard' %}">Open dashboard</a>{% else %}<a class="btn btn-primary btn-lg" href="{% url 'register' %}">Create free profile</a><a class="btn btn-outline-dark btn-lg" href="{% url 'login' %}">Sign in</a>{% endif %}
+      </div>
+      <p class="small text-secondary mt-3 mb-0">Academic prototype. Certificate hashes are recorded in local demo mode by default.</p>
+    </div>
+    <div class="col-lg-5">
+      <div class="feature-panel">
+        <div class="feature-icon">✦</div><h5>One platform. Three capabilities.</h5>
+        <div class="mini-feature"><span>01</span><div><b>Resume skill extraction</b><small>Identify technical skills from your CV</small></div></div>
+        <div class="mini-feature"><span>02</span><div><b>Internship matching</b><small>Compare your skills with role requirements</small></div></div>
+        <div class="mini-feature"><span>03</span><div><b>Credential integrity</b><small>Compare certificate fingerprints</small></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="row g-3 mb-5">
+  <div class="col-md-4"><div class="stat-card"><h3>AI</h3><p>Skill extraction and matching</p></div></div>
+  <div class="col-md-4"><div class="stat-card"><h3>SHA-256</h3><p>Certificate fingerprinting</p></div></div>
+  <div class="col-md-4"><div class="stat-card"><h3>Web3</h3><p>Optional smart-contract extension</p></div></div>
+</div>
+<div class="d-flex justify-content-between align-items-end mb-3"><div><span class="eyebrow">START EXPLORING</span><h2 class="h3 fw-bold mt-2">Sample internships</h2></div><a href="{% url 'internships' %}" class="text-decoration-none">View all →</a></div>
+<div class="row g-3">{% for item in internships %}<div class="col-md-4"><div class="card clean-card h-100"><div class="card-body"><span class="badge text-bg-light mb-2">{{ item.location }}</span><h5>{{ item.title }}</h5><p class="text-secondary">{{ item.company }}</p><p class="small">{{ item.required_skills }}</p></div></div></div>{% empty %}<p>Run <code>python manage.py seed_internships</code> to add demo listings.</p>{% endfor %}</div>
+{% endblock %}

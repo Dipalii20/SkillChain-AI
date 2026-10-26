@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-wrap mx-auto"><span class="eyebrow">PUBLIC LOOKUP</span><h1 class="h2 fw-bold mt-2">Verify a credential record</h1><p class="text-secondary">Enter the record ID shared by the certificate holder.</p>
+<form method="get" class="card clean-card p-4"><label class="form-label fw-semibold">Record ID</label><input class="form-control" name="record_id" value="{{ record_id }}" placeholder="e.g. DEMO-ABC123" required><button class="btn btn-primary mt-3">Find record</button></form>
+{% if record_id %}<div class="card clean-card p-4 mt-3">{% if certificate %}<span class="badge text-bg-success align-self-start">Record found</span><h5 class="mt-2">{{ certificate.title }}</h5><p>Issuer: {{ certificate.issuer }}</p><p class="small hash-text">SHA-256: {{ certificate.sha256_hash }}</p><p class="small">Mode: {{ certificate.blockchain_mode }}</p><p class="small text-secondary mb-0">This lookup is against the local demo database. It is not independent public-chain verification.</p>{% else %}<div class="alert alert-warning mb-0">No registered record was found for that ID.</div>{% endif %}</div>{% endif %}
+</div>
+{% endblock %}

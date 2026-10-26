@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-wrap mx-auto">
+  <div class="mb-4"><span class="eyebrow">SKILLCHAIN AI</span><h1 class="h2 fw-bold mt-2">{{ heading }}</h1><p class="text-secondary">Add accurate information to improve your profile and recommendations.</p></div>
+  <form method="post" enctype="multipart/form-data" class="card clean-card p-4">{% csrf_token %}
+    {% for field in form %}
+      <div class="mb-3"><label class="form-label fw-semibold" for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}{% for error in field.errors %}<div class="text-danger small">{{ error }}</div>{% endfor %}</div>
+    {% endfor %}
+    {% if form.non_field_errors %}<div class="alert alert-danger">{{ form.non_field_errors }}</div>{% endif %}
+    <button class="btn btn-primary btn-lg mt-2">{{ button }}</button>
+  </form>
+</div>
+{% endblock %}
